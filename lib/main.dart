@@ -32,11 +32,23 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final getTextController = TextEditingController();
 
-  String chars = '0';
+  String charCount = '0';
+  String wordCount = '0';
+  
 
   void countChars() {
     setState(() {
-      chars = getTextController.text.length.toString();
+      charCount = getTextController.text.length.toString();
+    });
+  }
+  
+  void countWords(){
+    setState(() {
+      String text = getTextController.text.toString();
+
+      final RegExp regExp = RegExp(r"[\w-._]+");
+      final Iterable matches = regExp.allMatches(text);
+      wordCount = matches.length.toString();
     });
   }
 
@@ -57,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
               TextField(
                 onChanged: (text) {
                   countChars();
+                  countWords();
                 },
                 maxLines: 6,
                 controller: getTextController,
@@ -66,8 +79,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Text(
-                chars,
+                'Words: $wordCount',
               ),
+              Text(
+                'Characters: $charCount',
+              )
             ],
           ),
         ),
