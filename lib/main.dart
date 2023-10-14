@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const WordCounter());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class WordCounter extends StatelessWidget {
+  const WordCounter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,34 +15,33 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Word counter'),
+      home: const MainPage(title: 'Word counter'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class MainPage extends StatefulWidget {
+  const MainPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MainPageState extends State<MainPage> {
   final getTextController = TextEditingController();
 
   String charCount = '0';
   String wordCount = '0';
-  
 
   void countChars() {
     setState(() {
       charCount = getTextController.text.length.toString();
     });
   }
-  
-  void countWords(){
+
+  void countWords() {
     setState(() {
       String text = getTextController.text.toString();
 
